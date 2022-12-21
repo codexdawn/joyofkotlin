@@ -43,7 +43,7 @@ fun main(args:Array<String>) {
      * - sequence 에서 use 밖을 벗어나서 forEach 시키면 안됨. 예외발생함(IOException)
      * - 지연계산 컬렉션이기때문에 한줄한줄 실제로 읽어들일때 수행하는 로직이다. use함수블록을 벗어나는순간 자동으로 자원이 닫히기때문에 Use내에서 모든처리를 다해야함.
      */
-    val fileName = "/Users/dawn/workspace/joyofkotlin/src/main/kotlin/chapter2/file.txt"
+    val fileName = "src/main/kotlin/chapter2/file.txt"
 
     File(fileName).inputStream()
         .use { it.bufferedReader()
@@ -55,7 +55,7 @@ fun main(args:Array<String>) {
      * 한줄씩 받아서 처리하는 방법
      */
     File(fileName).forEachLine { println(it) }
-    File(fileName).useLines { println(it) }
+    File(fileName).useLines { it.forEach(::println) }
 
 }
 
