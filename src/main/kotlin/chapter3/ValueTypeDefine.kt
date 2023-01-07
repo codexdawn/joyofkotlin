@@ -1,24 +1,22 @@
 package chapter3
 
-data class Price(val value:Double) {
+data class Price private constructor(private val value:Double) {
     operator fun plus (price: Price) = Price(this.value + price.value)
 
     operator fun times(num:Int) = Price(this.value * num)
 
     companion object {
         val identity = Price(0.0)
-        operator fun invoke(value: Double) {
+        operator fun invoke(value: Double):Price =
             if (value > 0) {
                 Price(value)
             } else {
                 throw IllegalArgumentException("Price must be positive or null")
             }
-        }
     }
-
 }
 
-data class Weight(val value:Double) {
+data class Weight private constructor(private val value:Double) {
     operator fun plus(weight: Weight) = Weight(this.value + weight.value)
 
     operator fun times(num:Int) = Weight(this.value * num)
@@ -26,15 +24,14 @@ data class Weight(val value:Double) {
     companion object {
         val identity = Weight(0.0)
 
-        operator  fun invoke(value: Double) {
+        operator fun invoke(value: Double):Weight =
             if (value > 0) {
                 Weight(value)
             } else {
                 throw IllegalArgumentException("Weight must be positive or null")
             }
-        }
-    }
 
+    }
 }
 
 data class Product(val name:String, val price:Price, val weight: Weight)
